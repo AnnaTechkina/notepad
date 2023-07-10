@@ -1,27 +1,29 @@
 from tkinter import *
-from templates.form import InputForm
+from GUI.templates import InputForm, BaseWindow
 
 
-def registration():
-    window = Tk()
-    window.title("Secret Notepad (РЕГИСТРАЦИЯ)")
-    window.geometry('600x400')
+class RegistrationWindow(BaseWindow):
+    def __init__(self, title: str, geometry: str):
+        super().__init__("РЕГИСТРАЦИЯ", "600x800")
+        login_form = InputForm(self, 'ЛОГИН', 30)
+        login_form.pack(pady=15)
 
-    login_form = InputForm(window, 'ЛОГИН', 30)
-    login_form.pack(pady=15)
+        password_form = InputForm(self, 'ПАРОЛЬ', 30, show='*')
+        password_form.pack(pady=15)
 
-    password_form = InputForm(window, 'ПАРОЛЬ', 30, show='*')
-    password_form.pack(pady=15)
+        password_form2 = InputForm(self, 'ПОВТОРИТЕ ПАРОЛЬ', 30, show='*')
+        password_form2.pack(pady=12)
 
-    password_form2 = InputForm(window, 'ПОВТОРИТЕ ПАРОЛЬ', 30, show='*')
-    password_form2.pack(pady=12)
-
-    login_but = Button(window, width=15, text='СОХРАНИТЬ',
-                       relief=SOLID, cursor='hand2', font=('Arial', 10), command=None)
-    login_but.pack(pady=15)
-
-    window.mainloop()
+        login_but = Button(self,
+                           width=15,
+                           text='СОХРАНИТЬ',
+                           relief=SOLID,
+                           cursor='hand2',
+                           font=('Arial', 10),
+                           command=None)
+        login_but.pack(pady=15)
 
 
 if __name__ == '__main__':
-    registration()
+    reg_win = RegistrationWindow()
+    reg_win.mainloop()
