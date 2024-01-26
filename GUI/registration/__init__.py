@@ -1,0 +1,1 @@
+from GUI.registration.registration_window import RegistrationWindow
